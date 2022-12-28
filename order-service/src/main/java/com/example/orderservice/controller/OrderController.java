@@ -1,6 +1,7 @@
 package com.example.orderservice.controller;
 
 import com.example.orderservice.model.dto.RequestOrderDto;
+import com.example.orderservice.service.ClientService;
 import com.example.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,8 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createOrder(@RequestBody RequestOrderDto requestOrderDto ){
+    public void createOrder(@RequestBody RequestOrderDto requestOrderDto) {
         orderService.createOrder(requestOrderDto);
     }
+
 }

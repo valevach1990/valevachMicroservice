@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Setter
@@ -12,16 +13,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Component
 @Builder
-public class Orders {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
-    private Integer quantity;
-    @OneToOne(cascade = CascadeType.ALL)
-    private OrderInfo orderInfo;
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client clientId;
+    private String name;
+    @OneToMany(mappedBy = "clientId",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    private List<Orders> ordersList;
 }

@@ -17,16 +17,18 @@ public class OrderService {
 
 
     public void createOrder(RequestOrderDto requestOrderDto) {
-        Boolean result = webClient.get()
+        Orders orders = mapToOrder(requestOrderDto);
+      /*  Boolean result = webClient.get()
                 .uri("http://localhost:8081/api/inventory")
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
         if (result) {
-            orderRepository.save(mapToOrder(requestOrderDto));
-        }else {
+
+        } else {
             throw new IllegalArgumentException("Please try again");
-        }
+        }*/
+        orderRepository.save(orders);
 
     }
 
@@ -35,4 +37,9 @@ public class OrderService {
                 .quantity(requestOrderDto.getQuantity())
                 .build();
     }
+
+    public Orders findOrders(Long orderId) {
+        return orderRepository.findById(orderId).get();
+    }
+
 }
