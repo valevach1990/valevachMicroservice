@@ -19,6 +19,6 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "clientId",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "client",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     private List<Orders> ordersList;
 }

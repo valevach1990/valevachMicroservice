@@ -1,6 +1,7 @@
 package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.model.Inventory;
+import com.example.inventoryservice.model.dto.BooleanDto;
 import com.example.inventoryservice.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class InventoryService {
 
     @Transactional(readOnly = true)
     public boolean isInStuck(String skuCode) {
+
         return inventoryRepository.findBySkuCode(skuCode).isPresent();
     }
 

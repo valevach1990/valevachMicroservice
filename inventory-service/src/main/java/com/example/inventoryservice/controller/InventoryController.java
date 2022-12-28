@@ -26,4 +26,10 @@ public class InventoryController {
     public List<Inventory> getAllInventories() {
         return inventoryService.getAllInventories();
     }
+
+    @GetMapping("/a")
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean retBool() {
+        return true;
+    }
 }

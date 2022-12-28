@@ -14,8 +14,14 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createOrder(@RequestBody RequestClientDto requestClientDto ){
+    public void createClient(@RequestBody RequestClientDto requestClientDto ){
         clientService.createClient(requestClientDto);
+    }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public void reserveOrder(@RequestParam Long orderId,@RequestParam Long clientId ){
+        clientService.reserveOrder(orderId,clientId);
     }
 
 }

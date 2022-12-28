@@ -20,7 +20,8 @@ public class OrderInfoService {
         OrderInfo orderInfo = mapToOrderInfo(orderInfoRequestDto);
         Orders orders = orderService.findOrders(orderInfoRequestDto.getOrderId());
         orders.setOrderInfo(orderInfo);
-        /*orderInfoRepository.save(orderInfo);*/
+        orderInfo.setOrders(orders);
+        orderInfoRepository.save(orderInfo);
     }
 
     private OrderInfo mapToOrderInfo(@NotNull OrderInfoRequestDto orderInfoRequestDto) {

@@ -1,10 +1,12 @@
 package com.example.orderservice.service;
 
 import com.example.orderservice.model.Orders;
+import com.example.orderservice.model.dto.BooleanDto;
 import com.example.orderservice.model.dto.RequestOrderDto;
 import com.example.orderservice.repository.OrderRepository;
 import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -18,16 +20,6 @@ public class OrderService {
 
     public void createOrder(RequestOrderDto requestOrderDto) {
         Orders orders = mapToOrder(requestOrderDto);
-      /*  Boolean result = webClient.get()
-                .uri("http://localhost:8081/api/inventory")
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block();
-        if (result) {
-
-        } else {
-            throw new IllegalArgumentException("Please try again");
-        }*/
         orderRepository.save(orders);
 
     }
@@ -42,4 +34,18 @@ public class OrderService {
         return orderRepository.findById(orderId).get();
     }
 
+    public void reserveOrder(Orders orders) {
+        Boolean result = webClient.get()
+                .uri("http://localhost:8081/api/inventory/a")
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+        if (result) {
+            orders.setQuantity(orders.getQuantity() - 1);
+            orderRepository.save(orders);
+        } else {
+            throw new IllegalArgumentException("Please try again");
+        }
+
+    }
 }

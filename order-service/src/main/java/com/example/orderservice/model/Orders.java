@@ -23,5 +23,5 @@ public class Orders {
     private OrderInfo orderInfo;
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client clientId;
+    private Client client;
 }
