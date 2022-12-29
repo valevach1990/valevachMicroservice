@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
 
     public void createOrder(RequestOrderDto requestOrderDto) {
@@ -35,8 +35,8 @@ public class OrderService {
     }
 
     public void reserveOrder(Orders orders) {
-        Boolean result = webClient.get()
-                .uri("http://localhost:8081/api/inventory/a")
+        Boolean result = webClientBuilder.build().get()
+                .uri("http://inventory-service/api/inventory/a")
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
