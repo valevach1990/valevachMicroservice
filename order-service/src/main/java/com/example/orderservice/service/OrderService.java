@@ -1,12 +1,10 @@
 package com.example.orderservice.service;
 
 import com.example.orderservice.model.Orders;
-import com.example.orderservice.model.dto.BooleanDto;
 import com.example.orderservice.model.dto.RequestOrderDto;
 import com.example.orderservice.repository.OrderRepository;
 import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -16,7 +14,6 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
-
 
     public void createOrder(RequestOrderDto requestOrderDto) {
         Orders orders = mapToOrder(requestOrderDto);
@@ -46,6 +43,5 @@ public class OrderService {
         } else {
             throw new IllegalArgumentException("Please try again");
         }
-
     }
 }

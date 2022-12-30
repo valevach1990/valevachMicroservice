@@ -1,5 +1,6 @@
 package com.example.orderservice.controller;
 
+import com.example.orderservice.model.Orders;
 import com.example.orderservice.model.dto.RequestOrderDto;
 import com.example.orderservice.service.ClientService;
 import com.example.orderservice.service.OrderService;
@@ -18,6 +19,12 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createOrder(@RequestBody RequestOrderDto requestOrderDto) {
         orderService.createOrder(requestOrderDto);
+    }
+
+    @GetMapping("{orderId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Orders showOrder(@PathVariable Long orderId) {
+       return orderService.findOrders(orderId);
     }
 
 }
